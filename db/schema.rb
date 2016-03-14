@@ -11,8 +11,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 20160314131835) do
 
-ActiveRecord::Schema.define(version: 20160313233216) do
+  create_table "courses", force: :cascade do |t|
+    t.string   "uid"
+    t.boolean  "independent_study"
+    t.string   "name"
+    t.string   "code"
+    t.float    "credits"
+    t.text     "description"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "courses", ["uid"], name: "index_courses_on_uid", unique: true
+
+  create_table "courses_subjects", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "subject_id"
+  end
+
+  add_index "courses_subjects", ["course_id"], name: "index_courses_subjects_on_course_id"
+  add_index "courses_subjects", ["subject_id"], name: "index_courses_subjects_on_subject_id"
+
+  create_table "instructors", force: :cascade do |t|
+    t.string   "middle"
+    t.string   "first"
+    t.string   "last"
+    t.string   "email"
+    t.string   "uid",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "instructors", ["uid"], name: "index_instructors_on_uid", unique: true
+
+  create_table "segments", force: :cascade do |t|
+    t.string   "uid",        null: false
+    t.string   "name"
+    t.integer  "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "segments", ["subject_id"], name: "index_segments_on_subject_id"
+  add_index "segments", ["uid", "subject_id"], name: "index_segments_on_uid_and_subject_id", unique: true
+
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.string   "uid",          null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "subjects", ["uid"], name: "index_subjects_on_uid", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +73,5 @@ ActiveRecord::Schema.define(version: 20160313233216) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
-
 
 end

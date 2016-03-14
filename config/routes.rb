@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  get 'admin/index'
+  resources :subjects
+  resources :instructors
+  resources :courses
 
+  get 'admin' => 'admin#index'
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    post 'logout' => :destroy
+  end
+  
   get 'sessions/new'
 
   get 'sessions/create'
@@ -12,7 +21,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'users#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
