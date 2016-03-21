@@ -13,14 +13,21 @@
         <a class="navbar-brand" href="#">CourseCatalog</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="/subjects">Subjects</a></li>
-        <li><a href="/courses">Courses</a></li>
-        <li><a href="/instructors">Instructors</a></li>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Subjects", subjects_path %></li>
+        <li><%= link_to "Courses", courses_path %></li>
+        <li><%= link_to "Instructors", instructors_path %></li>
+
+        <% if session[:user_id] %>
+          <li><%= button_to 'Logout', logout_path, :class => "btn btn-default" %></li>
+        <% end %>
       </ul>
     </div>
   </nav>
-<%= yield %>
+
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

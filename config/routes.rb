@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'search' => 'search#new'
+  get 'search/results'
+
   resources :subjects
   resources :instructors
   resources :courses
@@ -9,19 +12,21 @@ Rails.application.routes.draw do
     post 'login' => :create
     post 'logout' => :destroy
   end
-  
+
   get 'sessions/new'
-
   get 'sessions/create'
-
   get 'sessions/destroy'
 
-  resources :users
+  resources :users do
+    member do
+      post 'enroll/:course_id' => 'user#enroll'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#show'
+  root 'welcome#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
