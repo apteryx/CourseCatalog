@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      post 'enroll/:course_id' => 'user#enroll'
+      post 'enroll/:course_id' => 'user#enroll', as: :enroll
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

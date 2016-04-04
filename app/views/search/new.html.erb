@@ -1,0 +1,10 @@
+<%= form_tag("/search/results", method: "get", remote: :true, id: "search-form") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q, nil, placeholder: "course name",
+  :onkeyup => "$(\"#search-form\").submit()")  %>
+  <%= select_tag(:subject_id, options_for_select(@subjects),
+    :onchange => "$(\"#search-form\").submit()") %>
+<% end %>
+
+<div id="results">
+</div>

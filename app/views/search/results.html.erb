@@ -1,0 +1,9 @@
+<table class="table">
+  <thead>Search Results</thead>
+  <tbody>
+    <% @courses.each do |c| %>
+    <tr>
+      <td><%= c.name %></td>
+      <td><%= button_to 'Enroll', enroll_user_url(@user.id, c.id), remote: true, id: "#{c.id}" %></td>
+<% end %>
+</table>

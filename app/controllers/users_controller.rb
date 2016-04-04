@@ -11,6 +11,10 @@ class UsersController < ApplicationController
 
   def enroll
     Enrollment.create(@user, @course)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /users/1
@@ -71,7 +75,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(session[:id])
+      @user = User.find(session[:user_id])
     end
 
     def set_course

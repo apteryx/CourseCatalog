@@ -17,9 +17,12 @@
         <li><%= link_to "Subjects", subjects_path %></li>
         <li><%= link_to "Courses", courses_path %></li>
         <li><%= link_to "Instructors", instructors_path %></li>
+        <li><%= link_to "Search", search_path %></li>
+      </ul>
 
+      <ul class="nav navbar-nav navbar-right">
         <% if session[:user_id] %>
-          <li><%= button_to 'Logout', logout_path, :class => "btn btn-default" %></li>
+          <li><%= button_to 'Logout', logout_path, :class => "btn btn-default navbar-btn", :id => "logout-btn" %></li>
         <% end %>
       </ul>
     </div>
